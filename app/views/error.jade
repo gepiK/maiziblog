@@ -1,0 +1,10 @@
+extends layout
+
+block main
+  h1= message
+  h2= error.status
+  pre #{error.stack}
+  div#alert.alert.alert-danger this is an error message
+  a.btn.btn-primary(href="https://www.baidu.com", target="_blank") baidu1
+
+

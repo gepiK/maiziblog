@@ -1,0 +1,9 @@
+extends ../layout
+
+block main
+  h1= 访问失败
+  h2= 没有权限
+  div#alert.alert.alert-danger 登录用户才能访问,3秒后跳转到登录页面。。。
+  a.btn.btn-primary(href="/admin/users/login", target="_blank") 登录
+  block srcipts
+    script (function(){setTimeout(function(){window.location.href="/admin/users/login"},3000)})()
