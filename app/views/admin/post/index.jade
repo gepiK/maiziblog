@@ -93,7 +93,7 @@ block content
             td
                 a(href="/posts/view/"+post._id, target="_blank")= post.title
             td= post.category.name
-            td= post.author.email
+            td= post.author ? post.author.email : ''
             td= moment(post.created).format('YYYY-MM-DD HH:mm:ss')
             td= post.meta.favourites || 0
             td= post.comments.length || 0
@@ -103,6 +103,9 @@ block content
                 &nbsp;&nbsp;
                 a(href="/admin/posts/edit/"+ post._id, class="btn btn-sm btn-info") 编辑 
                 &nbsp;&nbsp;
+                if !post.published
+                    a(href="/admin/posts/publish/"+ post._id, class="btn btn-sm btn-info") 发布 
+                    &nbsp;&nbsp;
                 a(href="/admin/posts/delete/"+ post._id, class="btn btn-sm btn-danger") 删除 
   
   if pageCount>1

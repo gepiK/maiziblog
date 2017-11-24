@@ -8,7 +8,7 @@ var config = {
     app: {
       name: 'hello-nodeblog'
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 8080,
     db: 'mongodb://localhost/nodeblog'
   },
 
@@ -17,7 +17,7 @@ var config = {
     app: {
       name: 'maiziblog'
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 8080,
     db: 'mongodb://localhost/maiziblog-test'
   },
 
@@ -26,7 +26,7 @@ var config = {
     app: {
       name: 'maiziblog'
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 8080,
     db: 'mongodb://localhost/maiziblog-production'
   }
 };

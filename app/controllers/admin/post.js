@@ -24,17 +24,17 @@ router.get('/',user.requireLogin, function (req, res, next) {
     sortObj[sortby] = sortdir;
 
     var condictions = {};
-    if(req.query.Category){
-        condictions.Category = req.query.Category.trim();
+    if(req.query.category){
+        condictions.category = req.query.category.trim();
     }
     if(req.query.author){
         condictions.author = req.query.author.trim();
     }
     if(req.query.keyword){
-        condictions.title =new RegExp(req.query.keyword.trim(),'i');
-        condictions.content =new RegExp(req.query.keyword.trim(),'i');
+        let title =new RegExp(req.query.keyword.trim(),'i');
+        let content =new RegExp(req.query.keyword.trim(),'i');
+        condictions.$or = [{title},{content}];
     }
-
     User.find({}, function (err, authors) {
         if (err) return next(err);
 
@@ -135,6 +135,23 @@ router.post('/edit/:id',user.requireLogin,getPostById, function (req, res, next)
             req.flash('info','文章保存成功');
             res.redirect('/admin/posts');
         });
+});
+
+router.get('/publish/:id',user.requireLogin, function (req, res, next) {
+    if (!req.params.id) {
+        return next(new Error('no post id provided'));
+    }
+    Post.update({ _id: req.params.id },{$set: { "published" : true }}).exec(function (err, rowsRemoved) {
+        if (err) {
+            return next(err);
+        }
+        if (rowsRemoved) {
+            req.flash('success', '文章删除成功！');
+        } else {
+            req.flash('success', '文章删除失败！');
+        }
+        res.redirect('/admin/posts')
+    })
 });
 
 

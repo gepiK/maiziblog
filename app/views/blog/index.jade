@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  h2.page-header Mode全栈博客系统
+  h2.page-header Node全栈博客系统
   each post in posts
     div.post
       h3.post-title
@@ -15,7 +15,7 @@ block content
             =moment(post.created).format('YYYY-MM-DD')
         span.post-author
             作者:&nbsp;
-            =post.author.name
+            =post.author ? post.author.name : ''
         span.post-category
             分类:&nbsp;
             a(href='/posts/category/'+post.category.name target="_blank")=post.category.name  
@@ -40,4 +40,3 @@ block content
               li
                 a(href="/posts?page=" + currentPage)= currentPage++
 block srcipts
-    script $(document).ready(function(){console.log('express is ready')})
